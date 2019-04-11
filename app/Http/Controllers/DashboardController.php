@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Auth;
+use App\User;
 class DashboardController extends Controller
 {
     /**
@@ -23,6 +24,20 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('dashboard');
+
+        /* return Auth::user();
+           return auth()->user()->id;
+           return Auth::user()->name;
+           $user_id = Auth::user()->id;
+           $user    = User::findOrFail($user_id);
+           return view('dashboard')->with('listings',$user->listings);
+           this is function in User Model
+        */
+
+        $user_id  = Auth::user()->id;
+        $user     = User::findOrFail($user_id);
+        return view('dashboard')->with('listings',$user->listings);
+
+
     }
 }
